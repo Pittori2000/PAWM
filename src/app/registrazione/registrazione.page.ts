@@ -90,15 +90,13 @@ export class RegistrazionePage implements OnInit {
 
   registrazione(value) {
     this.ionicAuthService.createUser(value)
-      .then((response) => {
-        this.errorMsg = "";
+      .then(
+        () => {
         this.utenteService.registra(this.createUtente(value));
-        this.openToast();
         this.goToLogin();
-      }, error => {
-        this.errorMsg = "Utente già esistente";
-        this.successMsg = "";
-      })
+        },
+        (error) => {}
+      )
   }
 
   private createUtente(value) : Utente { 
@@ -110,13 +108,5 @@ export class RegistrazionePage implements OnInit {
     this.router.navigateByUrl('login');
   }
 
-  async openToast() {  
-    const toast = await this.toastController.create({  
-      color: "success",
-      message: 'Utente Creato',   
-      duration: 4000  
-    });  
-    toast.present();  
-  }  
 
 }

@@ -43,8 +43,7 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private ionicAuthService: IonicAuthService,
-    private fb: FormBuilder,
-    private toastController: ToastController
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -62,13 +61,11 @@ export class LoginPage implements OnInit {
 
   login(value) {
     this.ionicAuthService.signinUser(value)
-      .then((response) => {
-        this.errorMsg = "";
+      .then(
+        (response) => {
         //this.router.navigateByUrl('dashboard');
-      }, error => {
-        this.errorMsg = "Credenziali Errate";
-        this.successMsg = "";
-      })
+      }, error => { }
+      )
   }
 
   goToRegistrazione() {
@@ -77,16 +74,5 @@ export class LoginPage implements OnInit {
 
   resetPassword(email: string){
     this.ionicAuthService.PasswordRecover(email);
-    this.openToast();
   }
-
-  async openToast() {  
-    const toast = await this.toastController.create({  
-      color: "success",
-      message: 'Email per il recupero della password Inviata',   
-      duration: 4000  
-    });  
-    toast.present();  
-  }  
-
 }

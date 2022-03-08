@@ -16,7 +16,6 @@ export class UtenteService {
 
   public registra(ut: Utente) {
     this.client.put<Utente>(this.url + 'registrazione', ut).subscribe(ris => {
-      
     });
   }
 }
